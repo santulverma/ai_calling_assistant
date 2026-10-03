@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ company_name }} - AI Calling Agent Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <h2>{{ company_name }}</h2>
+                    <span class="subtext">AI Calling Engine</span>
+                </div>
+            </div>
+
+            <div class="agent-profile-card">
+                <div class="avatar-ring">
+                    <div class="avatar">R</div>
+                    <span class="online-indicator"></span>
+                </div>
+                <div class="agent-details">
+                    <h4>{{ agent_name }}</h4>
+                    <p>Marketing & Growth Agent</p>
+                </div>
+            </div>
+
+            <nav class="nav-links">
+                <button class="nav-btn active" data-tab="dialer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    Live Calling Hub
+                </button>
+                <button class="nav-btn" data-tab="calls">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Call Logs & Analytics
+                </button>
+                <button class="nav-btn" data-tab="leads">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    Leads Pipeline
+                </button>
+                <button class="nav-btn" data-tab="appointments">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Booked Audits
+                </button>
+            </nav>
+
+            <div class="sidebar-status-box">
+                <div class="status-item">
+                    <span class="status-label">Telephony</span>
+                    <span class="status-val badge-plivo" id="telephonyBadge">Exotel Voicebot</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">STT</span>
+                    <span class="status-val badge-sarvam">{{ stt_engine }}</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">LLM</span>
+                    <span class="status-val badge-gemini">{{ llm_engine }}</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">TTS</span>
+                    <span class="status-val badge-sarvam">{{ tts_engine }}</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header Bar -->
+            <header class="topbar">
+                <div class="page-title-wrap">
+                    <h1>Real-Time AI Calling Command Center</h1>
+                    <p class="subtitle">Live bi-directional voice pipeline with barge-in interruption & dynamic RAG</p>
+                </div>
+                <div class="topbar-actions">
+                    <div class="public-url-pill">
+                        <span class="pulse-dot"></span>
+                        <span class="url-text">{{ public_url }}</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- TAB 1: Live Calling Hub -->
+            <div id="tab-dialer" class="tab-content active">
+                <div class="grid-container">
+                    <!-- Left Column: Dialer & Launch Panel -->
+                    <div class="card dialer-card">
+                        <div class="card-header">
+                            <h3>
+                                <span class="header-icon">📞</span>
+                                Trigger Outbound Marketing Call
+                            </h3>
+                            <span class="tag-pill">Outbound PSTN</span>
+                        </div>
+                        <div class="card-body">
+                            <form id="dialForm">
+                                <div class="form-group">
+                                    <label for="phoneNumber">Target Phone Number (with Country Code)*</label>
+                                    <div class="input-with-prefix">
+                                        <input type="text" id="phoneNumber" placeholder="+916263901452" value="+916263901452" required>
+                                    </div>
+                                    <span class="input-hint">E.164 standard international format</span>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group half">
+                                        <label for="prospectName">Prospect Name</label>
+                                        <input type="text" id="prospectName" placeholder="Santul Verma" value="Santul Verma">
+                                    </div>
+                                    <div class="form-group half">
+                                        <label for="companyName">Company / Brand</label>
+                                        <input type="text" id="companyName" placeholder="e.g. Acme Retail" value="Acme Retail">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group half">
+                                        <label for="telephonyProvider">Telephony Provider</label>
+                                        <select id="telephonyProvider">
+                                            <option value="exotel" selected>Exotel (India +91 Voicebot)</option>
+                                            <option value="telnyx">Telnyx Telephony</option>
+                                            <option value="plivo">Plivo Telephony</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group half">
+                                        <label for="prospectEmail">Email (For follow-up)</label>
+                                        <input type="email" id="prospectEmail" placeholder="prospect@example.com" value="vikram@acmeretail.com">
+                                    </div>
+                                </div>
+
+                                <div class="campaign-info-banner">
+                                    <div class="banner-icon">🎯</div>
+                                    <div class="banner-body">
+                                        <strong>Current Campaign Pitch:</strong>
+                                        <p>{{ product_name }} — Offer: 15-Min Marketing Funnel Audit & Demo.</p>
+                                    </div>
+                                </div>
+
+                                <div class="button-action-group">
+                                    <button type="submit" id="btnDial" class="btn-primary-glow">
+                                        <span class="btn-icon">⚡</span>
+                                        <span>Dial Phone via Carrier</span>
+                                    </button>
+                                    <div class="or-divider"><span>OR (100% FREE TEST)</span></div>
+                                    <button type="button" id="btnBrowserMicCall" class="btn-browser-call">
+                                        <span class="btn-icon">🎙️</span>
+                                        <span>Talk Live with Computer Mic</span>
+                                    </button>
+                                </div>
+                            </form>
+
+                            <div id="dialStatusAlert" class="dial-status-alert hidden"></div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Live Stream Pipeline & Conversation Monitor -->
+                    <div class="card live-monitor-card">
+                        <div class="card-header">
+                            <h3>
+                                <span class="header-icon">🎙️</span>
+                                Live Call Telephony & AI Audio Monitor
+                            </h3>
+                            <div class="call-state-pill" id="liveCallStatePill">
+                                <span class="state-dot"></span>
+                                <span id="callStateLabel">Standby / Idle</span>
+                            </div>
+                        </div>
+
+                        <!-- Real-time Flow Pipeline Visualization -->
+                        <div class="pipeline-visualizer">
+                            <div class="pipeline-step" id="node-caller">
+                                <div class="node-icon">📱</div>
+                                <span class="node-label">Callee</span>
+                            </div>
+                            <div class="pipeline-line">
+                                <div class="flow-particle"></div>
+                            </div>
+                            <div class="pipeline-step" id="node-plivo">
+                                <div class="node-icon">📡</div>
+                                <span class="node-label">Exotel Voicebot</span>
+                            </div>
+                            <div class="pipeline-line">
+                                <div class="flow-particle"></div>
+                            </div>
+                            <div class="pipeline-step" id="node-stt">
+                                <div class="node-icon">👂</div>
+                                <span class="node-label">Sarvam STT</span>
+                            </div>
+                            <div class="pipeline-line">
+                                <div class="flow-particle"></div>
+                            </div>
+                            <div class="pipeline-step" id="node-gemini">
+                                <div class="node-icon">🧠</div>
+                                <span class="node-label">Gemini Flash</span>
+                            </div>
+                            <div class="pipeline-line">
+                                <div class="flow-particle"></div>
+                            </div>
+                            <div class="pipeline-step" id="node-tts">
+                                <div class="node-icon">🗣️</div>
+                                <span class="node-label">Sarvam TTS</span>
+                            </div>
+                        </div>
+
+                        <!-- Barge-in Alert Banner -->
+                        <div id="bargeInBanner" class="bargein-banner hidden">
+                            <span class="warning-icon">⚡</span>
+                            <span>Barge-in Detected: Callee spoke; AI speech halted immediately.</span>
+                        </div>
+
+                        <!-- Live Transcript Feed -->
+                        <div class="transcript-feed-wrap">
+                            <div class="feed-header">
+                                <span>Real-Time Transcript Feed</span>
+                                <span class="live-tag">LIVE WS</span>
+                            </div>
+                            <div class="transcript-feed" id="liveTranscriptFeed">
+                                <div class="empty-feed-placeholder">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                    </svg>
+                                    <p>Ready for calls. When an outbound call is answered, real-time live dialogue between the customer and {{ agent_name }} will appear here.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: Call Logs -->
+            <div id="tab-calls" class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Call Logs & Engagement History</h3>
+                        <button class="btn-secondary" id="btnRefreshCalls">Refresh</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Call ID</th>
+                                    <th>Recipient</th>
+                                    <th>Status</th>
+                                    <th>Duration</th>
+                                    <th>Qualification</th>
+                                    <th>Time</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="callLogsTableBody">
+                                <tr><td colspan="7" class="loading-cell">Loading call logs...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: Leads -->
+            <div id="tab-leads" class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Leads Pipeline</h3>
+                        <button class="btn-secondary" id="btnNewLeadModal">+ Add Prospect</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Company</th>
+                                    <th>Status</th>
+                                    <th>Notes</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leadsTableBody">
+                                <tr><td colspan="6" class="loading-cell">Loading leads...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: Booked Audits -->
+            <div id="tab-appointments" class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Scheduled Growth & Funnel Audits</h3>
+                        <button class="btn-secondary" id="btnRefreshAppts">Refresh</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Client Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Booked Slot</th>
+                                    <th>Notes</th>
+                                    <th>Created At</th>
+                                </tr>
+                            </thead>
+                            <tbody id="appointmentsTableBody">
+                                <tr><td colspan="6" class="loading-cell">Loading booked audits...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Transcript Modal -->
+    <div id="transcriptModal" class="modal hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Call Transcript Details</h3>
+                <button class="btn-close" id="btnCloseModal">&times;</button>
+            </div>
+            <div class="modal-body" id="modalTranscriptContent">
+                Loading transcript...
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

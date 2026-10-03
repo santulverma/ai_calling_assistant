@@ -1,0 +1,54 @@
+{
+  "company": {
+    "name": "ApexGrowth AI",
+    "mission": "Empower growing businesses with autonomous AI sales and marketing agents that scale outreach and 3x qualified leads.",
+    "founded": "2024",
+    "location": "Bengaluru, India / San Francisco, CA"
+  },
+  "offer": {
+    "title": "Complimentary 15-Minute Marketing Funnel & ROI Audit",
+    "description": "A tailored 15-minute diagnostic call with a Senior Growth Strategist to uncover pipeline bottlenecks, conversion leaks, and demonstrate our live AI voice agent personalized for your business.",
+    "bonuses": "Includes a free 14-day test pilot with 500 outbound calling minutes."
+  },
+  "pricing": {
+    "starter": "₹39,999 ($499) / month - 2,000 calling minutes, basic analytics, CRM export",
+    "growth": "₹99,999 ($1,299) / month - 10,000 calling minutes, real-time CRM 2-way sync, custom brand voice persona, WhatsApp integration",
+    "enterprise": "Custom - Unlimited minutes, dedicated customer success manager, on-premise/private cloud options"
+  },
+  "faqs": [
+    {
+      "question": "How does ApexGrowth work?",
+      "answer": "ApexGrowth connects directly to your lead CRM or uploaded lists and conducts human-like conversational calls in real time. It answers questions, handles objections, and automatically schedules meetings on your calendar."
+    },
+    {
+      "question": "Which languages and accents are supported?",
+      "answer": "We support Indian English, Hinglish, Hindi, and regional Indic languages powered by Sarvam AI, as well as global US/UK English."
+    },
+    {
+      "question": "How quickly can we launch?",
+      "answer": "Most clients are live within 48 hours. Our team configures your custom marketing pitch, RAG knowledge base, and CRM integration."
+    }
+  ],
+  "objection_handling": [
+    {
+      "objection": "No budget or too expensive",
+      "counter": "I completely understand. That is why we are offering a 100% free 15-minute funnel audit with zero commitments. Our average client recovers 3 to 5 times their investment within the first 30 days."
+    },
+    {
+      "objection": "Send me an email or WhatsApp message first",
+      "counter": "I would love to send that over right away! I can dispatch our 1-page case study and quick video walk-through to your WhatsApp or email. May I confirm the best email address for you?"
+    },
+    {
+      "objection": "We already have a sales or marketing team",
+      "counter": "That is fantastic! ApexGrowth is designed specifically to assist your team by filtering through hundreds of cold leads and booking qualified meetings directly into your sales team's calendar so they only spend time closing."
+    },
+    {
+      "objection": "Are you an AI or a real person?",
+      "counter": "Yes, I am Riya, an AI marketing assistant created by ApexGrowth! I am speaking with you live to demonstrate how natural and effective conversational AI can be for business growth."
+    },
+    {
+      "objection": "Not interested right now",
+      "counter": "No problem at all! May I ask if scaling your inbound and outbound pipeline is a priority for next quarter, or would you prefer I simply check back in a few months?"
+    }
+  ]
+}
